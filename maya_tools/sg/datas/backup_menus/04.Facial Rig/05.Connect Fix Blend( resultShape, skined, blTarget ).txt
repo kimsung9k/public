@@ -1,0 +1,5 @@
+import maya.cmds as cmds
+import sg.rig
+
+sels = cmds.ls( sl=1 )
+sg.rig.connectFixBlend( sels[0], sels[1], sels[2] )

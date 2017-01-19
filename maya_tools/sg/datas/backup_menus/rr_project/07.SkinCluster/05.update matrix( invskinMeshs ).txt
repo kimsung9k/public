@@ -1,0 +1,16 @@
+import maya.cmds as cmds
+import sg.get
+
+sels = cmds.ls( sl=1 )
+
+for sel in sels:
+    nodes = sg.get.nodeFromHistory( sel, 'sgInverseSkinCluster' )
+    if not nodes: continue
+    cmds.setAttr( nodes[0] + '.updateMatrix', 1 )
+
+cmds.refresh()
+
+for sel in sels:
+    nodes = sg.get.nodeFromHistory( sel, 'sgInverseSkinCluster' )
+    if not nodes: continue
+    cmds.setAttr( nodes[0] + '.updateMatrix', 0 )

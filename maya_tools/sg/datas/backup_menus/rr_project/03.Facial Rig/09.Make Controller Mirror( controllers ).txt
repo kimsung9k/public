@@ -1,0 +1,3 @@
+import sg.rig
+
+sg.rig.makeControllerMirror( cmds.ls( sl=1 ) )

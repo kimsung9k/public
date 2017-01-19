@@ -1,0 +1,5 @@
+eyeArea = ['fRig:driver_eye_L_',
+'fRig:driver_eye_R_']
+
+
+cmds.select( eyeArea )

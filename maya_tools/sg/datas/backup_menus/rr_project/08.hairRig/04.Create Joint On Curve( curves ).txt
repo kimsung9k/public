@@ -1,0 +1,28 @@
+import sg.MainFunctions.hini_hair
+import sg.curve
+import sg.value
+
+sels = cmds.ls( sl=1 )
+
+lengths = []
+for sel in sels:
+    lengths.append( sg.curve.getCurveLength( sel ) )
+
+minValue = sg.value.minValue( lengths )
+maxValue = sg.value.maxValue( lengths )
+
+diffValue = maxValue - minValue
+
+minNum = 15
+maxNum = 25
+diffNum = maxNum - minNum
+
+curveAndNumPoints = []
+for sel in sels:
+    length = sg.curve.getCurveLength( sel )
+    numPoint  = int((length - minValue)/diffValue * diffNum) + minNum
+    curveAndNumPoints.append( [sel, numPoint] )
+    
+
+for curve, numPoint in curveAndNumPoints:
+    sg.MainFunctions.hini_hair.createJointOnCurve( curve, numPoint, 0.8 )

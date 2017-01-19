@@ -1,0 +1,15 @@
+import maya.cmds as cmds
+import sg.get
+
+sels = cmds.ls( sl=1 )
+
+fixMesh = sels[0]
+blendShapeMesh = sels[1]
+
+blendShapeNode = sg.get.nodeFromHistory(blendShapeMesh, "blendShape", pdo=1 )
+    
+if not blendShapeNode:
+    blendShapeNode = cmds.blendShape( fixMesh, blendShapeMesh, par=1 )
+else:
+    cuNum = len( cmds.ls( blendShapeNode[-1] + '.w[*]' ) )
+    cmds.blendShape( blendShapeNode[-1], e=1, t=( blendShapeMesh, cuNum, fixMesh, 1 ) )

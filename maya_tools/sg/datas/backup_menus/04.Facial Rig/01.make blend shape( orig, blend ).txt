@@ -1,0 +1,11 @@
+import maya.cmds as cmds
+import sg.connect
+
+sels = cmds.ls( sl=1 )
+
+newObj = cmds.duplicate( sels[0] )
+newObj[0] = cmds.rename( newObj[0], sels[1].replace( ':', '_' ) )
+blNode= cmds.blendShape( sels[1], newObj[0] )
+cmds.setAttr( blNode[0] + '.w[0]', 1 )
+
+sg.connect.outMeshToSrcInMesh( sels[0], newObj[0] )

@@ -1,0 +1,3 @@
+import sg.shader
+sels = cmds.ls( sl=1 )
+sg.shader.addAlphaBlendTexture( sels[0] )

@@ -1,0 +1,21 @@
+import sg.rig
+import sg.format
+import math
+import maya.OpenMaya as OpenMaya
+
+sels = cmds.ls( sl=1 )
+duOrig, duSkin = sg.rig.connectFixRig( sels[0], sels[1], sels[2] )
+
+bb = sg.format.BoundingBox( duOrig )
+xsize = math.fabs( (bb.max() - bb.min()).x )
+
+origPos  = OpenMaya.MVector( *cmds.xform( sels[2], q=1, ws=1, t=1 ) )
+shapePos = OpenMaya.MVector( *cmds.xform( sels[1], q=1, ws=1, t=1 ) )
+    
+xValue = ( origPos - shapePos ).x
+if xValue < 0: xsize *= -1
+duSkinPos =  OpenMaya.MPoint( shapePos.x + xsize, shapePos.y, shapePos.z )
+duOrigPos =  OpenMaya.MPoint( shapePos.x + xsize * 2, shapePos.y, shapePos.z )
+
+cmds.move( duSkinPos.x, duSkinPos.y, duSkinPos.z, duSkin, ws=1 )
+cmds.move( duOrigPos.x, duOrigPos.y, duOrigPos.z, duOrig, ws=1 )

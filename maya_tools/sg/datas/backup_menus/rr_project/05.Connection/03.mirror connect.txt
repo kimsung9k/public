@@ -1,0 +1,5 @@
+import sg.connect
+import sg.rig
+
+sels = cmds.ls( sl=1 )
+sg.rig.mirrorConnect( sels[0], sels[1] )

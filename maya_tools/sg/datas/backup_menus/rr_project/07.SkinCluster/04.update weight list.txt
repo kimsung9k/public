@@ -1,0 +1,10 @@
+import maya.cmds as cmds
+invSkinClusters = cmds.ls( type='sgInverseSkinCluster' )
+
+for node in invSkinClusters:
+    cmds.setAttr( node + '.updateWeightList', 1 )
+
+cmds.refresh()
+
+for node in invSkinClusters:
+    cmds.setAttr( node + '.updateWeightList', 0 )

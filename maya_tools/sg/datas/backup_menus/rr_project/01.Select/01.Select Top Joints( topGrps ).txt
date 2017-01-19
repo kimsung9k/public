@@ -1,0 +1,5 @@
+import maya.cmds as cmds
+import sg.dag
+
+topJoints = sg.dag.getTopJointChildren( cmds.ls( sl=1 ) )
+cmds.select( topJoints )

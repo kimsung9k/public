@@ -1,0 +1,13 @@
+import maya.cmds as cmds
+
+meshs = cmds.ls( type='mesh' )
+
+delTargets = []
+
+for mesh in meshs:
+    if cmds.getAttr( mesh + '.io' ): continue
+    
+    if not cmds.listConnections( mesh+'.worldMesh' ) and not cmds.listConnections( mesh+'.outMesh' ) and not cmds.listConnections( mesh+'.inMesh' ):
+        delTargets.append( mesh )
+
+cmds.select( delTargets )

@@ -1,0 +1,2 @@
+import sg.MainFunctions.hini_hair
+sg.MainFunctions.hini_hair.createGravitySetting( cmds.ls( sl=1 ) )

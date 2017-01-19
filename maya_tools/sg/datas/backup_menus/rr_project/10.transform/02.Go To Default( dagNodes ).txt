@@ -1,0 +1,2 @@
+import sg.transform
+sg.transform.goToDefault( cmds.ls( sl=1 ) )

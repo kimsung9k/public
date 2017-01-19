@@ -1,0 +1,3 @@
+import sg.Function_autoRig
+sels = cmds.ls( sl=1 )
+sg.Function_autoRig.connectMiddles( sels[0], sels[-1], sels[1:-1], [1,0,0] )

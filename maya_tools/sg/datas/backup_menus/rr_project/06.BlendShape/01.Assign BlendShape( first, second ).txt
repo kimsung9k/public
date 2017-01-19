@@ -1,0 +1,3 @@
+import sg.blendShape
+sels = cmds.ls( sl=1 )
+sg.blendShape.assignBlendShape( sels[0], sels[1] )

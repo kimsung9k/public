@@ -1,0 +1,2 @@
+import sg.transform
+sg.transform.goToOrigPosition( cmds.ls( sl=1 ) )

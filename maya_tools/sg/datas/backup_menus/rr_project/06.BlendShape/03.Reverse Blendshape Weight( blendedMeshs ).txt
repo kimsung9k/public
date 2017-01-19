@@ -1,0 +1,4 @@
+import sg.blendShape
+sels = cmds.ls( sl=1 )
+for sel in sels:
+    sg.blendShape.reverseBlendShapeWeight( sel  )

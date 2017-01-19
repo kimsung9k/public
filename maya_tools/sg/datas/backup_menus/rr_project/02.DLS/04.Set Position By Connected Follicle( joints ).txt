@@ -1,0 +1,2 @@
+import sg.Function_DLS
+sg.Function_DLS.setJointPosToConnectedFollicle( cmds.ls( sl=1 ) )

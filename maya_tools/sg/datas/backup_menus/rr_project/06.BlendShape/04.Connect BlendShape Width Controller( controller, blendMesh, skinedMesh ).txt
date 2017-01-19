@@ -1,0 +1,7 @@
+import sg.rig
+import sg.format
+import math
+import maya.OpenMaya as OpenMaya
+
+sels = cmds.ls( sl=1 )
+sg.rig.connectBlendShapeRig( sels[0], sels[1], sels[2] )

@@ -1,0 +1,30 @@
+import maya.OpenMaya as OpenMaya
+import maya.cmds as cmds
+import sg.format
+import math
+import copy
+
+sels = cmds.ls( sl=1 )
+
+orig = sels[0]
+shapes = sels[1:]
+
+bb = sg.format.BoundingBox( orig )
+dist = math.fabs( (bb.max() - bb.min()).x )
+
+origPos = OpenMaya.MVector( *cmds.xform( orig, q=1, ws=1, t=1 ) )
+
+for shape in shapes:
+    duShape = cmds.duplicate( orig )[0]
+    bl = cmds.blendShape( shape, duShape, tc=0 )
+    cmds.setAttr( bl[0] + '.w[0]', 1 )
+    duShape = cmds.rename( duShape, shape.split( ':' )[0] + 'Target' )
+    
+    shapePos = OpenMaya.MVector( *cmds.xform( shape, q=1, ws=1, t=1 ) )
+    
+    xValue = ( origPos - shapePos ).x
+    editDist = copy.copy( dist )
+    if xValue < 0: editDist *= -1
+    posV =  OpenMaya.MPoint( shapePos.x + editDist, shapePos.y, shapePos.z )
+    
+    cmds.move( posV.x, posV.y, posV.z, duShape, ws=1 )

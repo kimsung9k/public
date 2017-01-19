@@ -1,0 +1,22 @@
+mouthArea = ['fRig:Ctl_Jaw',
+'fRig:Ctl_zygomatic_muscle_L_',
+'fRig:Ctl_zygomatic_muscle_R_',
+'fRig:Ctl_lip_Lower_L_',
+'fRig:Ctl_lip_Lower_R_',
+'fRig:Ctl_depMuscle_L_',
+'fRig:Ctl_depMuscle_R_',
+'fRig:Ctl_sneerMuscle_L_',
+'fRig:Ctl_sneerMuscle_R_',
+'fRig:Ctl_lip_Upper_L_',
+'fRig:Ctl_lip_Upper_R_',
+'fRig:Ctl_check_L_',
+'fRig:Ctl_check_R_',
+'fRig:Ctl_lip_Upper_C_',
+'fRig:Ctl_lip_Lower_C_',
+'fRig:Ctl_mouseMove',
+'fRig:Ctl_mouseSide_L_',
+'fRig:Ctl_mouseSide_R_',
+'fRig:driver_tongue02']
+
+
+cmds.select( mouthArea )

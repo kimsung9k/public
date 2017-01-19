@@ -1,0 +1,9 @@
+browArea = ['fRig:Ctl_eyeBrowIn_L_',
+'fRig:Ctl_eyeBrowOut_L_',
+'fRig:Ctl_eyeBrowIn_R_',
+'fRig:Ctl_eyeBrowOut_R_',
+'fRig:Ctl_eyebrowCenter',
+'fRig:Ctl_eyeBrow_L_',
+'fRig:Ctl_eyeBrow_R_']
+
+cmds.select( browArea )

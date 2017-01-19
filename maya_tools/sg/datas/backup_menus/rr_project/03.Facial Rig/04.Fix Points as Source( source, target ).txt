@@ -1,0 +1,3 @@
+import sg.rig
+sels = cmds.ls( sl=1 )
+sg.rig.fixPointsAsSource( sels[0], sels[1] )

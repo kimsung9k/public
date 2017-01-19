@@ -1,0 +1,7 @@
+import sg.Function_autoRig
+sels = cmds.ls( sl=1 )
+jntHelps = []
+for sel in sels:
+    jntHelp = sg.Function_autoRig.getStdJntHelp( sel )
+    jntHelps.append( jntHelp )
+cmds.select( jntHelps )

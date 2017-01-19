@@ -1,0 +1,10 @@
+import maya.cmds as cmds
+sels = cmds.ls( sl=1 )
+
+first = sels[0]
+second = sels[1]
+
+if first.find( '_L_' ) != -1:
+    cmds.rename( second, first.replace( '_L_', '_R_' ) )
+elif first.find( '_R_' ) != -1:
+    cmds.rename( second, first.replace( '_R_', '_L_' ) )

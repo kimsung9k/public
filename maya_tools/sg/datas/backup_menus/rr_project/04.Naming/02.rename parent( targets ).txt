@@ -1,0 +1,5 @@
+import maya.cmds as cmds
+sels = cmds.ls( sl=1 )
+for sel in sels:
+    selP = cmds.listRelatives( sel, p=1, f=1 )
+    cmds.rename( selP, 'P' + sel )

@@ -1,0 +1,4 @@
+import sg.Function_autoRig
+import maya.cmds as cmds
+sels = cmds.ls( sl=1 )
+sg.Function_autoRig.makeFingerStdJnt( sels )

@@ -1,0 +1,21 @@
+import maya.cmds as cmds
+import sg.skinCluster
+
+sels = cmds.ls( sl=1 )
+
+jnt = sels[0]
+mesh = sels[1]
+
+childJnt = cmds.createNode( 'joint' )
+
+childJnt = cmds.parent( childJnt, jnt )[0]
+
+cmds.setAttr( childJnt + '.t', 0,0,0 )
+cmds.setAttr( childJnt + '.r', 0,0,0 )
+cmds.setAttr( childJnt + '.s', 0,0,0 )
+cmds.setAttr( childJnt + '.sh', 0,0,0 )
+
+radValue = cmds.getAttr( jnt + '.radius' )
+cmds.setAttr( childJnt + '.radius', radValue * 2 )
+
+sg.skinCluster.replaceSkinClusterJoint( jnt, childJnt, mesh )

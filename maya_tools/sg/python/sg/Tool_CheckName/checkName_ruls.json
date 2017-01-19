@@ -1,0 +1,7 @@
+{
+    "update":"2015-01-10",
+    "head":["Red","Blue","Big","Small","Round","Little","Long","Short"],
+    "middle":["Red","Blue","Big","Small","Round","Little","Long","Short"],
+    "position":["LT","RT","FR","BK","UN","UP","DN","UL","UR","DR","CE","TA"],
+    "type":["CTL","GEO","JNT","UND"]    
+}

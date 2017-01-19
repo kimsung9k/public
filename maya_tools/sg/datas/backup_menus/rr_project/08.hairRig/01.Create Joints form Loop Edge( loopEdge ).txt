@@ -1,0 +1,2 @@
+import sg.MainFunctions.hini_hair
+sg.MainFunctions.hini_hair.createHairJointOnHairMesh_fromLoopEdge( cmds.ls( sl=1 ) )

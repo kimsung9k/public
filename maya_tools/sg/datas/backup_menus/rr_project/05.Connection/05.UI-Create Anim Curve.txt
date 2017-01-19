@@ -1,0 +1,2 @@
+import sg.Tool_createAnimCurve
+sg.Tool_createAnimCurve.show()

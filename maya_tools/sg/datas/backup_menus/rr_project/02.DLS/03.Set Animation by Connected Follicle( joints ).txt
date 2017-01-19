@@ -1,0 +1,2 @@
+import sg.Function_DLS
+sg.Function_DLS.setAnimationFollicleConnectedJoints( cmds.ls( sl=1 ) )

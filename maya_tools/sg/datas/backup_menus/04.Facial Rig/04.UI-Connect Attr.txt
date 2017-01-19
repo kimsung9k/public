@@ -1,0 +1,2 @@
+import sg.Tool_connectAttr
+sg.Tool_connectAttr.show()

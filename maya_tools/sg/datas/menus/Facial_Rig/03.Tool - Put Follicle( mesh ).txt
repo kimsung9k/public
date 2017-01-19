@@ -1,0 +1,3 @@
+if not cmds.pluginInfo( 'SGMPlug_putFollicle', q=1, l=1 ):
+    cmds.loadPlugin( 'SGMPlug_putFollicle' )
+cmds.setToolTo('PutFollicleContext1')
