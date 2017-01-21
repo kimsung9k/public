@@ -404,7 +404,8 @@ def createMixamoHandleForAutoRig( mixamoHip ):
         
         mixamoJntChild = cmds.listRelatives( mixamoJoint, c=1, f=1 )
         if mixamoJntChild and axisIndex != -1:
-            sg.connect.lookAtConnect( mixamoJntChild[0], handle, axisIndex )
+            if len( mixamoJntChild ) == 1:
+                connect.lookAtConnect( mixamoJntChild[0], handle, axisIndex )
         
     
     for mixamoName, handleName, rotation1, rotation2, axisIndex in targets:
