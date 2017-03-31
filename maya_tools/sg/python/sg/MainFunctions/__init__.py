@@ -1,10 +1,11 @@
 import maya.cmds as cmds
 import sg.node
-import sg.Tool_createAnimCurve
 import sg.connect
 
 
 def getConnectedAnimCurve( evt=0 ):
+    
+    import sg.Tool_createAnimCurve
     
     sels = cmds.ls( sl=1 )
     node = sels[0]

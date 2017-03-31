@@ -1,11 +1,13 @@
 import maya.cmds as cmds
-import sg.Tool_imageLoader
-import sg.Tool_loadImagePlane
-import sg.Tool_pluginReload
-import sg.Tool_connectAttr
+
 
 
 def create( parent ):
+    
+    import sg.Tool_imageLoader
+    import sg.Tool_loadImagePlane
+    import sg.Tool_pluginReload
+    import sg.Tool_connectAttr
     
     if cmds.ls( sl=1 ): return None
     

@@ -35,4 +35,3 @@ def createFollicleOnMeshByPositions( points, baseMesh ):
         follicles.append( follicleTr )
     
     return follicles
-
