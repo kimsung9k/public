@@ -1,0 +1,10 @@
+import maya.cmds as cmds
+sels = cmds.ls( sl=1 )
+src = sels[0]
+target = sels[-1]
+duTarget = cmds.duplicate( target, n=src[1:] )[0]
+
+bl = cmds.blendShape( src, duTarget )[0]
+cmds.setAttr( bl + '.w[0]', 1 )
+
+cmds.select( duTarget )

@@ -127,3 +127,120 @@ def reverseBlendShapeWeight( target ):
     for i in range( fnMesh.numVertices() ):
         weightValue = cmds.getAttr( plugWeights.name() + '[%d]' % i )
         cmds.setAttr( plugWeights.name() + '[%d]' % i, 1-weightValue )
+
+
+def multBlendShapeWeight( srcTarget, dstTarget ):
+    
+    blendSrc = sg.get.nodeFromHistory( srcTarget, 'blendShape', pdo=1)
+    blendDst = sg.get.nodeFromHistory( dstTarget, 'blendShape', pdo=1 )
+    if not blendSrc or not blendDst: 
+        if not blendSrc:
+            cmds.error( "%s has no blend shape" % srcTarget )
+        elif not blendDst:
+            cmds.error( "%s has no blend shape" % blendDst )
+        return None
+    blendSrc = blendSrc[0]
+    blendDst = blendDst[0]
+    
+    fnBlendSrc = OpenMaya.MFnDependencyNode( sg.base.getMObject( blendSrc ) )
+    plugWeightsSrc = fnBlendSrc.findPlug( 'inputTarget' )[0].child(1)
+    fnBlendDst = OpenMaya.MFnDependencyNode( sg.base.getMObject( blendDst ) )
+    plugWeightsDst = fnBlendDst.findPlug( 'inputTarget' )[0].child(1)
+    
+    fnMeshSrc = OpenMaya.MFnMesh( sg.base.getDagPath( sg.dag.getShape( srcTarget ) ) )
+    fnMeshDst = OpenMaya.MFnMesh( sg.base.getDagPath( sg.dag.getShape( dstTarget ) ) )
+    
+    if fnMeshSrc.numVertices() != fnMeshDst.numVertices(): 
+        cmds.error( "%s and %s has not same" % fnMeshSrc.partialPathName(), fnMeshDst.partialPathName() )
+        return None
+    
+    for i in range( fnMeshSrc.numVertices() ):
+        weightSrcValue = cmds.getAttr( plugWeightsSrc.name() + '[%d]' % i )
+        weightDstValue = cmds.getAttr( plugWeightsDst.name() + '[%d]' % i )
+        cmds.setAttr( plugWeightsDst.name() + '[%d]' % i, weightSrcValue * weightDstValue )
+
+
+
+def addBlendShapeWeight( srcTarget, dstTarget ):
+    
+    blendSrc = sg.get.nodeFromHistory( srcTarget, 'blendShape', pdo=1)
+    blendDst = sg.get.nodeFromHistory( dstTarget, 'blendShape', pdo=1 )
+    if not blendSrc or not blendDst: 
+        if not blendSrc:
+            cmds.error( "%s has no blend shape" % srcTarget )
+        elif not blendDst:
+            cmds.error( "%s has no blend shape" % blendDst )
+        return None
+    blendSrc = blendSrc[0]
+    blendDst = blendDst[0]
+    
+    fnBlendSrc = OpenMaya.MFnDependencyNode( sg.base.getMObject( blendSrc ) )
+    plugWeightsSrc = fnBlendSrc.findPlug( 'inputTarget' )[0].child(1)
+    fnBlendDst = OpenMaya.MFnDependencyNode( sg.base.getMObject( blendDst ) )
+    plugWeightsDst = fnBlendDst.findPlug( 'inputTarget' )[0].child(1)
+    
+    fnMeshSrc = OpenMaya.MFnMesh( sg.base.getDagPath( sg.dag.getShape( srcTarget ) ) )
+    fnMeshDst = OpenMaya.MFnMesh( sg.base.getDagPath( sg.dag.getShape( dstTarget ) ) )
+    
+    if fnMeshSrc.numVertices() != fnMeshDst.numVertices(): 
+        cmds.error( "%s and %s has not same" % fnMeshSrc.partialPathName(), fnMeshDst.partialPathName() )
+        return None
+    
+    for i in range( fnMeshSrc.numVertices() ):
+        weightSrcValue = cmds.getAttr( plugWeightsSrc.name() + '[%d]' % i )
+        weightDstValue = cmds.getAttr( plugWeightsDst.name() + '[%d]' % i )
+        sumWeight = weightSrcValue + weightDstValue
+        if sumWeight > 1: sumWeight =1 
+        cmds.setAttr( plugWeightsDst.name() + '[%d]' % i,sumWeight  )
+
+
+def minusBlendShapeWeight( srcTarget, dstTarget ):
+    
+    blendSrc = sg.get.nodeFromHistory( srcTarget, 'blendShape', pdo=1)
+    blendDst = sg.get.nodeFromHistory( dstTarget, 'blendShape', pdo=1 )
+    if not blendSrc or not blendDst: 
+        if not blendSrc:
+            cmds.error( "%s has no blend shape" % srcTarget )
+        elif not blendDst:
+            cmds.error( "%s has no blend shape" % blendDst )
+        return None
+    blendSrc = blendSrc[0]
+    blendDst = blendDst[0]
+    
+    fnBlendSrc = OpenMaya.MFnDependencyNode( sg.base.getMObject( blendSrc ) )
+    plugWeightsSrc = fnBlendSrc.findPlug( 'inputTarget' )[0].child(1)
+    fnBlendDst = OpenMaya.MFnDependencyNode( sg.base.getMObject( blendDst ) )
+    plugWeightsDst = fnBlendDst.findPlug( 'inputTarget' )[0].child(1)
+    
+    fnMeshSrc = OpenMaya.MFnMesh( sg.base.getDagPath( sg.dag.getShape( srcTarget ) ) )
+    fnMeshDst = OpenMaya.MFnMesh( sg.base.getDagPath( sg.dag.getShape( dstTarget ) ) )
+    
+    if fnMeshSrc.numVertices() != fnMeshDst.numVertices(): 
+        cmds.error( "%s and %s has not same" % fnMeshSrc.partialPathName(), fnMeshDst.partialPathName() )
+        return None
+    
+    for i in range( fnMeshSrc.numVertices() ):
+        weightSrcValue = cmds.getAttr( plugWeightsSrc.name() + '[%d]' % i )
+        weightDstValue = cmds.getAttr( plugWeightsDst.name() + '[%d]' % i )
+        sumWeight = weightDstValue - weightSrcValue
+        if sumWeight < 0: sumWeight =0 
+        cmds.setAttr( plugWeightsDst.name() + '[%d]' % i,sumWeight  )
+
+
+
+
+def setPointsJust( first, second ):
+    
+    firstMesh = cmds.listRelatives( first, s=1, f=1 )[0]
+    secondMesh = cmds.listRelatives( second, s=1, f=1 )[0]
+    
+    fnMeshFirst  = OpenMaya.MFnMesh( sg.base.getDagPath( firstMesh ) )
+    fnMeshSecond = OpenMaya.MFnMesh( sg.base.getDagPath( secondMesh ) )
+    
+    pointsFirst = OpenMaya.MPointArray()
+    fnMeshFirst.getPoints( pointsFirst )
+    fnMeshSecond.setPoints( pointsFirst )
+
+
+
+    

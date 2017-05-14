@@ -1,6 +1,0 @@
-import maya.cmds as cmds
-import sg.blendShape
-
-targets = cmds.ls( sl=1 )
-for target in targets:
-    sg.blendShape.reverseBlendShapeWeight( target )

@@ -1,0 +1,43 @@
+import maya.cmds as cmds
+
+def copyShader( first, second ):
+    
+    if not cmds.objExists( first ): return None
+    if not cmds.objExists( second ): return None
+    
+    first  = sg.dag.getTransform( first )
+    second = sg.dag.getTransform( second )
+    firstShape = sg.dag.getShape( first )
+    secondShape = sg.dag.getShape( second )
+    
+    engines = cmds.listConnections( firstShape, type='shadingEngine' )
+    
+    if not engines: return None
+    
+    engines = list( set( engines ) )
+    
+    for engine in engines:
+        shaders = cmds.listConnections( engine+'.surfaceShader', s=1, d=0 )
+        if not shaders: continue
+        shader = shaders[0]
+        cmds.hyperShade( objects = shader )
+        selObjs = cmds.ls( sl=1 )
+        
+        targetObjs = []
+        for selObj in selObjs:
+            if selObj.find( '.' ) != -1:
+                trNode, components = selObj.split( '.' )
+                if trNode == first:
+                    targetObjs.append( second+'.'+components )
+            elif selObj == firstShape:
+                targetObjs.append( secondShape )
+        
+        if not targetObjs: continue
+        
+        for targetObj in targetObjs:
+            cmds.sets( targetObj, e=1, forceElement=engine )
+
+sels = cmds.ls( sl=1 )
+
+for sel in sels[1:]:
+    copyShader( sels[0], sel )

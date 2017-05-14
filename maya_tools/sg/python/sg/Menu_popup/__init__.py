@@ -7,7 +7,7 @@ import menu_default
 import menu_channelConnect
 import os
 
-
+'''
 class Popup_Global:
     
     name = 'SGMTool_popupMenu'
@@ -60,5 +60,5 @@ def show(*args):
         menu_dag.create( Popup_Global.name )
     elif dgNodes:
         menu_dg.create( Popup_Global.name )
-    
+    '''
     
